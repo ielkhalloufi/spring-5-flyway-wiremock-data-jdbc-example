@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/weather
+    driver-class-name: org.postgresql.Driver
