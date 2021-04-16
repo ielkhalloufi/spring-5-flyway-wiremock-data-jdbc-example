@@ -1,19 +1,16 @@
 package com.assignment.spring.services.weather.repository;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.time.LocalDateTime;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
-@Table(name = "weather")
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+@Table("WEATHER")
 public class WeatherEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String city;
@@ -22,7 +19,7 @@ public class WeatherEntity {
 
     private Double temperature;
 
-    @Column(name = "last_updated")
+    @Column("LAST_UPDATED")
     private LocalDateTime lastUpdated;
 
     public WeatherEntity() {
@@ -66,5 +63,18 @@ public class WeatherEntity {
 
     public void setLastUpdated(LocalDateTime lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WeatherEntity that = (WeatherEntity) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
